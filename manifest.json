@@ -1,8 +1,9 @@
 {
-  "name": "Getting Started Example",
+  "name": "Tabnabbing",
   "version": "1.0",
-  "description": "Build an Extension!",
-  "permissions": ["activeTab","declarativeContent", "storage"],
+  "author": "Minzhi He & Yuqing Wang",
+  "description": "Tabnabbing Detection Extension!",
+  "permissions": ["activeTab","tabs", "<all_urls>"],
   "background": {
   	"scripts": ["background.js"],
   	"persistent":false
