@@ -10,7 +10,7 @@
   },
   "page_action": {
   	"default_icon": "image/safe.png",
-  	"default_popup": "start.html",
+  	"default_popup": "start.html"
   },
   "manifest_version": 2
 }
