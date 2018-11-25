@@ -1,4 +1,5 @@
 var buffer={}; // store the tabs
+var Threshold=0.4;
 
 chrome.tabs.onActivated.addListener(function (activeInfo) {
     chrome.tabs.get(activeInfo.tabId, function callback(tab){
@@ -7,7 +8,12 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
     })
 });
 
-chrome.tabs.onRemoved.addListener(function(tabId, removeInfo)); 
+chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+    if(removeInfo.isWindowClosing){
+        stop_thread();
+    }
+    removeTab(tabId);
+}); 
                                    
 chrome.tabs.onCreated.addListener(function(tab));
 

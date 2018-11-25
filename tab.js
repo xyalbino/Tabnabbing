@@ -23,4 +23,14 @@ function compare(dataUrl, id){
         buffer[id]=dataUrl;
         
     })
+    
+function remove(tabId) {
+    delete buffer[tabId];
+}
+    
+function stop_thread(){
+    clearTimeout(thread);
+    thread=null;
+}
+    
 }
