@@ -4,10 +4,10 @@ var Threshold=0.4;
 chrome.tabs.onActivated.addListener(function (activeInfo) {
     chrome.tabs.get(activeInfo.tabId, function callback(tab){
         var url = new URL(tab.url);
-        var result = getScreenshot(tab);
-        chrome.tabs.sendMessage(tab.id,{image : result} function(response) {
+        getScreenshot(tab);
+ /*       chrome.tabs.sendMessage(tab.id,{image : result} function(response) {
             console.log(response.confirmation);
-        });
+        });*/
     })
 });
 
