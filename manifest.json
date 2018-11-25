@@ -1,0 +1,16 @@
+{
+  "name": "Tabnabbing",
+  "version": "1.0",
+  "author": "Minzhi He & Yuqing Wang",
+  "description": "Tabnabbing Detection Extension!",
+  "permissions": ["activeTab","tabs", "<all_urls>"],
+  "background": {
+  	"scripts": ["resemble.js","addEventListener.js","tab.js"],
+  	"persistent":false
+  },
+  "page_action": {
+  	"default_icon": "image/safe.png"，
+  	"default_popup": "start.html",
+  },
+  "manifest_version": 2
+}
