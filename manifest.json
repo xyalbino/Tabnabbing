@@ -9,7 +9,7 @@
   	"persistent":false
   },
   "page_action": {
-  	"default_icon": "image/safe.png",
+  	"default_icon": "image/safe.jpg",
   	"default_popup": "start.html"
   },
   "manifest_version": 2
