@@ -10,6 +10,7 @@ function remove(tabId) {
 function getScreenshot(tab){
     thread = setInterval(function(){
         chrome.tabs.captureVisibleTab({format : "png"}, function(dataUrl){
+            if(chrome.runtime.lastError) return;
             if(buffer[tab.id]==undefined){
                 buffer[tab.id]=dataUrl;
                 //console.log(buffer[tab.id]);
@@ -24,17 +25,17 @@ function getScreenshot(tab){
                 //console.log("asadada");
             }
         })        
-    },500);
+    },1000);
 }
 
 function compare(dataUrl, id){
     resemble(dataUrl).compareTo(buffer[id]).onComplete(function(data){
         var percent=data.misMatchPercentage;
         img = data.getImageDataUrl();
-        console.log(img);
+        //console.log(img);
         var icon;
-        console.log(data.misMatchPercentage);
-        console.log(data.getImageDataUrl());
+        //console.log(data.misMatchPercentage);
+        //console.log(data.getImageDataUrl());
         if(percent > Threshold){
             //var diffImage = document.getElementById('res_img');
 		    //img = data.getImageDataUrl();
