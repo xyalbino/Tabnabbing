@@ -1,0 +1,1 @@
+document.getElementById("res_img").src=chrome.extension.getBackgroundPage().img;

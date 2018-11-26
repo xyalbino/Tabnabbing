@@ -1,8 +1,11 @@
 var buffer={}; // store the tabs
-var Threshold=0.4;
+var Threshold=0.05;
 var flag=true;
+var thread=null;
+var img=null;
 
 chrome.tabs.onActivated.addListener(function (activeInfo) {
+    stop_thread();
     chrome.tabs.get(activeInfo.tabId, function callback(tab){
         flag =true;
         var url = new URL(tab.url);
@@ -17,7 +20,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
     if(removeInfo.isWindowClosing){
         stop_thread();
     }
-    removeTab(tabId);
+    remove(tabId);
 }); 
                                    
 //chrome.tabs.onCreated.addListener(function(tab));
@@ -36,3 +39,4 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
             sendResponse({confirmation: "Successfully created div"});
         }
     });*/
+                                     
