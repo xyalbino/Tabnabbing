@@ -9,7 +9,12 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
     chrome.tabs.get(activeInfo.tabId, function callback(tab){
         flag =true;
         var url = new URL(tab.url);
-        getScreenshot(tab);
+        try{
+        getScreenshot(tab);    
+        }catch(err){
+            console.log("....")
+        }
+        
         //chrome.tabs.sendMessage(tab.id,{image : result} function(response) {
            // console.log(response.confirmation);
         //});
