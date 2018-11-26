@@ -3,7 +3,7 @@
   "version": "1.0",
   "author": "Minzhi He & Yuqing Wang",
   "description": "Tabnabbing Detection Extension!",
-  "permissions": ["activeTab","tabs", "tabCapture","<all_urls>"],
+  "permissions": ["<all_urls>","activeTab","tabs", "tabCapture","*://*/*"],
   "background": {
   	"scripts": ["resemble.js","tab.js","addEventListener.js"],
   	"persistent":false
