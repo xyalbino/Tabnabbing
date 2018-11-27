@@ -52,12 +52,12 @@ function getScreenshot(tab){
                 //console.log("asadada");
             }
         })        
-    },500);
+    },1000);
 }
 
 function compare(dataUrl, id){
     resemble(dataUrl).compareTo(buffer[id]).onComplete(function(data){
-        var percent=data.misMatchPercentage;
+        percent=data.misMatchPercentage;
         img = data.getImageDataUrl();
        // console.log(img);
         var icon;
@@ -85,6 +85,15 @@ function compare(dataUrl, id){
             icon={tabId:id, path:"image/safe.png"};
              chrome.pageAction.setIcon(icon);
         }
+  /*      chrome.tabs.query({active: true, windowId: windowId}, function (tabs) {
+        chrome.tabs.get(tabs[0].id, function (tab) {
+            if (tab.active) {
+                chrome.browserAction.setBadgeText({
+                    text: percent
+                });
+            }
+        });
+    });*/
        
         chrome.pageAction.show(id);
         //buffer[id]=dataUrl;

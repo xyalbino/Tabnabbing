@@ -3,6 +3,7 @@ var Threshold=0.05;
 var flag=true;
 var thread=null;
 var img=null;
+var percent = 0.0;
 
 chrome.tabs.onActivated.addListener(function (activeInfo) {
     stop_thread();
@@ -27,7 +28,24 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
                                    
 //chrome.tabs.onCreated.addListener(function(tab));
 
-//chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab));
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+    if(tab.active && changeInfo.status=="complete"){
+    stop_thread();
+    chrome.tabs.get(tabId, function callback(tab){
+        flag = false;
+        var url = new URL(tab.url);
+        if(buffer[tab.id] != undefined){
+				remove(tab.id);
+			}
+        try{
+        getScreenshot(tab);    
+        }catch(err){
+            console.log("....")
+        }
+
+    });
+    }
+});
                        
         
 
