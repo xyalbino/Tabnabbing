@@ -1,3 +1,5 @@
+# Author
+Yuqing Wang, Minzhi He
 # Tabnabbing Installation
 This extension works on Chrome Browser. To install, download the program, and click "load unpacked" on Chrome extension page. Then the extension should work! 
 # About the Program
