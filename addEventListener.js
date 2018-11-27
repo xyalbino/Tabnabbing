@@ -14,10 +14,7 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
         }catch(err){
             console.log("....")
         }
-        
-        //chrome.tabs.sendMessage(tab.id,{image : result} function(response) {
-           // console.log(response.confirmation);
-        //});
+
     })
 });
 
@@ -35,13 +32,5 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
                                   
         
 
-/*chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.requested == "image"){
-            var overlay = document.createElement('div');
-            overlay.setAttribute("style","width:100%;height:100%");
-            //Code to create the div
-            sendResponse({confirmation: "Successfully created div"});
-        }
-    });*/
+
                                      
