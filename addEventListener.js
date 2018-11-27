@@ -28,8 +28,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
 //chrome.tabs.onCreated.addListener(function(tab));
 
 //chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab));
-
-                                  
+                       
         
 
 
