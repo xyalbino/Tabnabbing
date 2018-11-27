@@ -11,13 +11,17 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
 
         if (request.greeting == "hello"){
-            var result = document.createElement('img');
+            var result = document.createElement('div');
             result.id="result";
             result.style.width = "100%";
             result.style.height = "100%";
+            result.style.top = "0px";
+            result.style.left = "0px";
+            result.style.backgroundImage = "url(" + request.data + ")";
+            result.style.backgroundSize = "100% 100%"
             result.style.position = "fixed";
           //  result.style.overflow = "hidden";
-            result.src = "abc.jpg";//request.data;
+            
             result.addEventListener("click", function(){
                 var temp = document.getElementById('result')
                     temp.parentNode.removeChild(temp);
