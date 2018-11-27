@@ -1,5 +1,5 @@
 var buffer={}; // store the tabs
-var Threshold=0.05;
+var Threshold=0.30;
 var flag=true;
 var thread=null;
 var img=null;
