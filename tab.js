@@ -1,15 +1,23 @@
+/*
+Minzhi He & Yuqing Wang
+URL: https://github.com/xyalbino/Tabnabbing
+*/
+
+//stop the thread
 function stop_thread(){
     clearInterval(thread);
     thread=null;
 }
 
+//remove the thread
 function remove(tabId) {
     delete buffer[tabId];
 }
 
+//mark the differences on the page
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-
+        //request.greeting=="hello",request.data=dataUrl
         if (request.greeting == "hello"){
             var result = document.createElement('div');
             result.id="result";
@@ -20,8 +28,6 @@ chrome.runtime.onMessage.addListener(
             result.style.backgroundImage = "url(" + request.data + ")";
             result.style.backgroundSize = "100% 100%"
             result.style.position = "fixed";
-          //  result.style.overflow = "hidden";
-            
             result.addEventListener("click", function(){
                 var temp = document.getElementById('result')
                     temp.parentNode.removeChild(temp);
@@ -29,48 +35,38 @@ chrome.runtime.onMessage.addListener(
             document.body.appendChild(result);
             console.log(request.data);
             sendResponse({confirmation: "Successfully created div"});
-
         }
     });
-           
 
+//take the screenshot
 function getScreenshot(tab){
     thread = setInterval(function(){
         chrome.tabs.captureVisibleTab({format : "png"}, function(dataUrl){
             if(chrome.runtime.lastError) return;
             if(buffer[tab.id]==undefined){
                 buffer[tab.id]=dataUrl;
-                //console.log(buffer[tab.id]);
             }
             else{
                 if(flag==true){
-                //console.log(dataUrl);
                 compare(dataUrl,tab.id);
                 flag=false;
                 } 
                 buffer[tab.id]=dataUrl;
-                //console.log("asadada");
             }
         })        
-    },1000);
+    },500);
 }
 
-function compare(dataUrl, id){
-    resemble(dataUrl).compareTo(buffer[id]).onComplete(function(data){
+//compare the difference
+function compare(dataUrl, id){      resemble(dataUrl).compareTo(buffer[id]).onComplete(function(data){
         percent=data.misMatchPercentage;
         img = data.getImageDataUrl();
-       // console.log(img);
         var icon;
-      //  console.log(data.misMatchPercentage);
-      //  console.log(data.getImageDataUrl());
-        if(percent > Threshold){
-            //var diffImage = document.getElementById('res_img');
-		    //img = data.getImageDataUrl();
+        if(percent > Threshold){ //Threshold=0.30
               chrome.tabs.query({
                 active: true,
                 currentWindow: true
             }, function(tabs) {
-
                  chrome.tabs.sendMessage(id, 
                   { greeting: "hello",data: img }, function(response) {
                      console.log('111');
@@ -80,23 +76,9 @@ function compare(dataUrl, id){
             });
         }
         else{
-            //var diffImage = document.getElementById('res_img');
-		    //img = data.getImageDataUrl();
             icon={tabId:id, path:"image/safe.png"};
              chrome.pageAction.setIcon(icon);
-        }
-  /*      chrome.tabs.query({active: true, windowId: windowId}, function (tabs) {
-        chrome.tabs.get(tabs[0].id, function (tab) {
-            if (tab.active) {
-                chrome.browserAction.setBadgeText({
-                    text: percent
-                });
-            }
-        });
-    });*/
-       
-        chrome.pageAction.show(id);
-        //buffer[id]=dataUrl;
-        
+        }  
+        chrome.pageAction.show(id);        
     })
 }
